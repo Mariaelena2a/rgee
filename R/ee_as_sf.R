@@ -3,15 +3,15 @@
 #' @param x EE table to be converted into a sf object.
 #' @importFrom geojsonio geojson_sf
 #' @details
-#' For exporting large spatial objects is better creates export pipelines
-#' through `ee$batch$Export$table$*` and `rgee::ee_download_*` instead of
+#' To export large spatial objects it is preferable to create export pipelines
+#' by using `ee$batch$Export$table$*` and `rgee::ee_download_*`, instead of
 #' using `ee_as_sf`. See
 #' \href{https://developers.google.com/earth-engine/client_server}{Client
 #' vs Server} documentation for details.
 #' @return An sf class object, see Details.
 #' @examples
 #' library(rgee)
-#' ee_reattach() # reattach ee as a reserve word
+#' ee_reattach() # reattach ee as a reserved word
 #' ee_Initialize()
 #' roi <- ee$Geometry$Polygon(list(
 #'   c(-122.27577209472656, 37.891247253777074),
@@ -25,9 +25,9 @@
 #' sf_subset <- ee_as_sf(subset)
 #' cat('Object size in Mb:', as.numeric(object.size(sf_subset)/10^6))
 #' plot(sf_subset)
-#' # Define an arbitrary region in which to compute random points.
+#' # Define an arbitrary region where compute random points are computed.
 #' region <- ee$Geometry$Rectangle(-119.224, 34.669, -99.536, 50.064)
-#' # Create 1000 random points in the region.
+#' # To create 1000 random points in the region.
 #' ee_randomPoints <- ee$FeatureCollection$randomPoints(region)
 #' sf_randomPoints <- ee_as_sf(ee_randomPoints)
 #' plot(sf_randomPoints)
