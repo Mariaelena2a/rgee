@@ -62,7 +62,7 @@
 #' library(rgee)
 #' library(stars)
 #'
-#' ee_reattach() # reattach ee as a reserve word
+#' ee_reattach() # reattach ee as a reserved word
 #' ee_Initialize()
 #' nc <- st_read(system.file("shp/arequipa.shp", package = "rgee"))
 #' dem_palette <- c(
@@ -112,7 +112,7 @@ ee_as_thumbnail <- function(x, region, dimensions, vizparams = NULL, crs = 4326,
   if (max(dimensions) > 5000) {
     if (!quiet) {
       cat(sprintf(
-        "For large image (%sx%s) is preferible use rgee::ee_download_*()\n",
+        "For large image (%sx%s) is preferible to use rgee::ee_download_*()\n",
         dimensions[1], dimensions[2]
       ))
     }
