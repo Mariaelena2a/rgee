@@ -1,19 +1,19 @@
-#' Move Earth Engine (EE) results from Google Drive to Hard disk
+#' Move Earth Engine (EE) results from Google Drive to you Hard disk
 #'
-#' Move results of an EE task saved in Google Drive to Hard disk.
+#' Move EE task results stored on Google Drive to your Hard disk.
 #'
-#' @param task List generated after finished correctly a EE task. See details.
-#' @param filename Character. Output filename. If absent, a temporary
+#' @param task List generated after the EE task has been successfully completed. See more details.
+#' @param filename Character. Output filename. If missing, a temporary
 #' file is created.
-#' @param overwrite A boolean indicating whether "filename" should be
-#' overwritten if it exists.
-#' @param st logical. By default this is TRUE, returning a sf (stars)
+#' @param overwrite A boolean wich indicates whether "filename" should be
+#' overwritten, if applicable.
+#' @param st logical. By default is is TRUE, returning a sf (stars)
 #' object for EE tables (images). If FALSE, the output filename is returned.
 #' @param quiet logical. Suppress info message
 #'
 #' @details
-#' The task argument needs "COMPLETED" task state to work, since the
-#' parameters necessaries to locate the file into google drive are obtained
+#' The task argument needs an status as task "COMPLETED" to work, since the
+#' parameters necessary to locate the file into google drive are obtained
 #' from ee$batch$Export$*$toDrive(...)$start()$status().
 #' @return
 #' An sf, stars or character depending on the retunclass argument.
@@ -27,7 +27,7 @@
 #'
 #' ee_Initialize()
 #'
-#' # Example 1 -- Download a Image
+#' # Example 1 -- Download an Image
 #' # Communal Reserve Amarakaeri - Peru
 #' xmin <- -71.132591318
 #' xmax <- -70.953664315
@@ -164,25 +164,25 @@ ee_download_drive <- function(task, filename, overwrite = FALSE, st = TRUE,
 }
 
 
-#' Move EE results from Google Cloud Storage to Hard disk
+#' Move EE results from Google Cloud Storage to your Hard disk
 #'
-#' Move results of an EE task saved in Google Cloud Storage to Hard disk.
+#' Move EE task results stored on Google Cloud Storage to your Hard disk.
 #'
-#' @param task List generated after finished correctly a EE task. See details.
+#' @param task List generated after the EE task has been successfully completed. See more details.
 #' @param filename Output filename.
-#' @param overwrite A boolean indicating whether "filename" should
+#' @param overwrite A boolean which indicates whether "filename" should
 #' be overwritten.
 #' @param GCS_AUTH_FILE Authentication json file you have downloaded from
 #' your Google Cloud Project
 #' @param quiet Logical. Suppress info message
 #' @details
-#' The best way to use `rgee::ee_download_gcs` is save the Google Cloud
+#' The best way to use `rgee::ee_download_gcs` is to save the Google Cloud
 #' Project JSON file into `ee_get_earthengine_path()` with the name
-#' GCS_AUTH_FILE.json. It is necessary in order to attain that rgee can
-#' read the credentials automatically.
+#' GCS_AUTH_FILE.json. It is necessary to make rgee automatically
+#' read the credentials.
 #'
-#' The task argument needs "COMPLETED" task state to work, since the parameters
-#' necessaries to locate the file into google cloud storage are obtained from
+#' The task argument needs an status as task "COMPLETED" to work, since the parameters
+#' necessary to locate the file into google cloud storage are obtained from
 #' ee$batch$Export$*$toCloudStorage(...)$start()$status().
 #' @examples
 #' \dontrun{
@@ -227,7 +227,7 @@ ee_download_drive <- function(task, filename, overwrite = FALSE, st = TRUE,
 #' mean_l5 <- mean_l5$reproject(crs = "EPSG:4326", scale = 500)
 #' mean_l5_Amarakaeri <- mean_l5$clip(ee_geom)
 #'
-#' # Download a EE Image
+#' # Download an EE Image
 #' task_img <- ee$batch$Export$image$toCloudStorage(
 #'   image = mean_l5_Amarakaeri,
 #'   bucket = "bag_csaybar",
@@ -301,10 +301,10 @@ ee_download_gcs <- function(task, filename, overwrite = FALSE,
 
 #' Monitoring Earth Engine task progress
 #'
-#' @param task List generated after finished correctly a EE task, if it is
-#' missing the last one will be taken.
+#' @param task List generated after an EE task has been successfully completed. If
+#' missing, the last one will be taken.
 #' @param eeTaskList Logical, if \code{TRUE}, all Earth Engine tasks will
-#' listing initially.
+#' be listed.
 #'
 #' @export
 #' @examples
@@ -397,7 +397,7 @@ create_filenames <- function(basename, suffix, fileformat) {
   return(filename)
 }
 
-#' Create the download file according to its format
+#' Create a download file according to its format
 #' @noRd
 read_filenames <- function(filename, fileformat, quiet) {
   if (fileformat == "GEO_TIFF") {
@@ -421,7 +421,7 @@ read_filenames <- function(filename, fileformat, quiet) {
   }
 }
 
-#' Sort google drives files
+#' Sort Google Drives files
 #' @noRd
 sort_drive_files <- function(drive_files, fileformat) {
   if (fileformat == "SHP") {
@@ -437,7 +437,7 @@ sort_drive_files <- function(drive_files, fileformat) {
   drive_files_sort
 }
 
-#' Sort hard disk files
+#' Sort your Hard Disk files
 #' @noRd
 sort_harddisk_files <- function(harddisk_files, fileformat) {
   if (fileformat == "SHP") {
