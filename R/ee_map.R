@@ -5,22 +5,22 @@
 #' through \code{\link[mapview]{mapview}}.
 #'
 #' @param eeobject An EE spatial object.
-#' @param vizparams A list that contains the visualization parameters. See
+#' @param vizparams List of parameters for visualization. See
 #' details.
 #' @param center The longitude and latitude of the map center. If it is not
-#' defined, ee_map will try to estimate the centroid of the spatial EE object.
+#' defined, ee_map will try to determine the centroid of the spatial EE object.
 #' @param  zoom_start zoom level.
-#' @param objname character vector. Name of the map, or maps in case that the
-#' EE object be an ImageCollection.
+#' @param objname character vector. Name of the map, or maps in case
+#' EE object is an ImageCollection.
 #' @param quiet logical; suppress info messages.
 #' @param ... Ignored.
 #' @details
 #' `ee_map` takes advantage of the ee$Image()$getMapId python function for
-#' fetch and return a mapid and token that is suitable for use in a
+#' fetch and return a map ID and token that is suitable for use in a
 #' \code{\link[mapview]{mapview}}. To achieve desirable visualization
-#' effects, it will depend on the type of spatial EE object . For neither
+#' effects, it will depend on the type of spatial EE object . For either
 #' Image or ImageCollection, you can provide visualization parameters to
-#' ee_map by the parameter vizparams. The
+#' ee_map by using vizparams. The
 #' \href{https://developers.google.com/earth-engine/image_visualization}{
 #' parameters} available are:
 #'
@@ -32,7 +32,7 @@
 #' numbers, one for each band \cr
 #' \strong{max}      \tab  Value(s) to map to 1 \tab  number or list of three
 #' numbers, one for each band \cr
-#' \strong{gain}     \tab  Value(s) by which to multiply each pixel value \tab
+#' \strong{gain}     \tab  Value(s) which multiplies each pixel value \tab
 #' number or list of three numbers, one for each band \cr
 #' \strong{bias}     \tab  Value(s) to add to each Digital Number (DN)
 #' value \tab number or list of three numbers, one for each band \cr
@@ -46,7 +46,7 @@
 #'
 #' If you add an Image or ImageCollection to the map without any additional
 #' parameters, by default `ee_map` assigns the first three bands to red,
-#' green and blue, respectively. The default stretch is based on the min-max
+#' green and blue bands, respectively. The default stretch is based on the min-max
 #' range.  For Geometry, Feature or FeatureCollection. The available
 #' vizparams are:
 #' \itemize{
@@ -59,7 +59,7 @@
 #' @examples
 #'
 #' library(rgee)
-#' ee_reattach() # reattach ee as a reserve word
+#' ee_reattach() # reattach ee as a reserved word
 #' ee_Initialize()
 #'
 #' # Case: Geometry*
@@ -158,7 +158,7 @@ ee_map.ee.geometry.Geometry <- function(eeobject,
     center <- ee_py_to_r(eeobject$centroid()$getInfo()$coordinates)
     if (!quiet) {
       cat(
-        " center is missing, the centroid of this EE Geometry is used: \n",
+        " center is missing, the centroid of this EE Geometry is used.\n",
         "center: ", paste(center, collapse = " "), "\n"
       )
     }
@@ -200,7 +200,7 @@ ee_map.ee.feature.Feature <- function(eeobject,
     center <- ee_py_to_r(eeobject$geometry()$centroid()$getInfo()$coordinates)
     if (!quiet) {
       cat(
-        " center is missing, the centroid of this EE Feature is used: \n",
+        " center is missing, the centroid of this EE Feature is used.\n",
         "center: ", paste(center, collapse = " "), "\n"
       )
     }
@@ -246,7 +246,7 @@ ee_map.ee.featurecollection.FeatureCollection <- function(eeobject,
     if (!quiet) {
       cat(
         "center is missing, the centroid of this",
-        "EE FeatureCollection is used: \n",
+        "EE FeatureCollection is used. \n",
         "center: ", paste(center, collapse = " "), "\n"
       )
     }
@@ -298,7 +298,7 @@ ee_map.ee.image.Image <- function(eeobject,
       ee_py_to_r()
     if (!quiet) {
       cat(
-        " center is missing, the centroid of this EE Image object is used: \n",
+        " center is missing, the centroid of this EE Image object is used. \n",
         "center: ", paste(center, collapse = " "), "\n"
       )
     }
@@ -352,7 +352,7 @@ ee_map.ee.imagecollection.ImageCollection <- function(eeobject,
     if (!quiet) {
       cat(
         " center is missing, the centroid of this",
-        "EE ImageCollection is used: \n",
+        "EE ImageCollection is used. \n",
         "center: ", paste(center, collapse = " "), "\n"
       )
     }
@@ -393,7 +393,7 @@ ee_geom_vizparams <- function() {
   list(color = "000000", strokeWidth = 3, pointRadius = 3)
 }
 
-#' Making sure the vizparams names on Images are correct!
+#' Making sure vizparams names on the Image are correct!
 #' @param x numeric vector; list names.
 #' @noRd
 ee_match_img_geoviz <- function(x) {
@@ -402,21 +402,21 @@ ee_match_img_geoviz <- function(x) {
     "gamma", "palette", "opacity", "format"
   )
   if (!all(x %in% band_names)) {
-    stop("vizparams has not been setting correctly")
+    stop("vizparams have not been set up correctly")
   }
 }
 
-#' Making sure the vizparams names on Vectors are correct!
+#' Making sure vizparams names on the Vectors are correct!
 #' @param x numeric vector; list names.
 #' @noRd
 ee_match_geom_geoviz <- function(x) {
   band_names <- c("color", "pointRadius", "strokeWidth")
   if (!all(x %in% band_names)) {
-    stop("vizparams has not been setting correctly")
+    stop("vizparams have not been set up correctly")
   }
 }
 
-#' Set colour whether it not exist.
+#' Set colour if it is not set.
 #' @param x list; visualization parameters
 #' @noRd
 ee_geom_exist_color <- function(x) {
