@@ -1,74 +1,74 @@
 #' Extract values for EE ImageCollections objects
 #'
-#' Extract values for a Image or ImageCollection spatial object
+#' Extract values for an Image or ImageCollection spatial object
 #' at the locations of geometry object. You can use ee.Geometries,
 #' ee.Features, ee.FeatureCollection and sf objects.
 #'
 #' @param x ee$Image or ee$ImageCollection.
 #' @param y ee$Geometry, ee$Feature, ee$FeatureCollection or sf objects.
-#' @param fun ee$Reducer object. Function to summarize the values. See details.
-#' @param scale A nominal scale in meters of the projection to work in.
-#' @param id Character. Name of the column to be used as a geometry index.
+#' @param fun ee$Reducer object. Function to summarize the values. See more details.
+#' @param scale A nominal scale in meters to work with.
+#' @param id Character. Column name to be used as a geometry index.
 #' @param ... reduceRegions additional parameters. See
-#' reticulate::ee_help(ee$Image()$reduceRegions) for details.
+#' reticulate::ee_help(ee$Image()$reduceRegions) for more details.
 #' @importFrom sf st_geometry st_geometry<-
 #' @details
-#' The fun arguments just admit Reducer objects that return one value.
+#' The fun arguments just admit Reduced objects that return one value.
 #' These are:
 #' \itemize{
-#' \item  \strong{allNonZero}: Returns a Reducer that returns 1 if all of its
+#' \item  \strong{allNonZero}: Returns a Reducer that returns 1 if all the
 #' inputs are non-zero, 0 otherwise. \cr
-#' \item \strong{anyNonZero}: Returns a Reducer that returns 1 if any of its
+#' \item \strong{anyNonZero}: Returns a Reducer that returns 1 if any of the
 #' inputs are non-zero, 0 otherwise. \cr
 #' \item \strong{bitwiseAnd}: Returns a Reducer that computes the bitwise-and
-#' summation of its inputs.
+#' the inputs are summed up.
 #' \item \strong{bitwiseOr}: Returns a Reducer that computes the bitwise-or
-#' summation of its inputs.
+#' the inputs are summed up.
 #' \item \strong{count}: Returns a Reducer that computes the number of
 #' non-null inputs.
-#' \item \strong{first}: Returns a Reducer that returns the first of its inputs.
+#' \item \strong{first}: Returns a Reducer that returns the first of the inputs.
 #' \item \strong{firstNonNull}: Returns a Reducer that returns the first of
-#' its non-null inputs.
+#' the non-null inputs.
 #' \item \strong{kurtosis}: Returns a Reducer that Computes the kurtosis of
-#' its inputs.
-#' \item \strong{last}: Returns a Reducer that returns the last of its inputs.
-#' \item \strong{lastNonNull}: Returns a Reducer that returns the last of its
+#' the inputs.
+#' \item \strong{last}: Returns a Reducer that returns the last of the inputs.
+#' \item \strong{lastNonNull}: Returns a Reducer that returns the last of the
 #' non-null inputs.
-#' \item \strong{max}: Creates a reducer that outputs the maximum value of
-#' its (first) input. If numInputs is greater than one, also outputs the
+#' \item \strong{max}: Creates a reducer that returns the maximum value of
+#' the (first) input. If numInputs is greater than one, also returns the
 #' corresponding values of the additional inputs.
 #' \item \strong{mean}: Returns a Reducer that computes the (weighted)
-#' arithmetic mean of its inputs.
+#' arithmetic mean of the inputs.
 #' \item \strong{median}: Create a reducer that will compute the median of
-#' the inputs. For small numbers of inputs (up to maxRaw) the median will be
-#' computed directly; for larger numbers of inputs the median will be derived
-#' from a histogram.
-#' \item \strong{min}: Creates a reducer that outputs the minimum value
-#' of its (first) input.  If numInputs is greater than one, also outputs
+#' the inputs. For a small number of inputs (up to maxRaw), the median will be
+#' computed directly; for a larger number of inputs, the median will be derived
+#' from the histogram.
+#' \item \strong{min}: Creates a reducer that returns the minimum value
+#' of the (first) input.  If numInputs is greater than one, also returns
 #' additional inputs.
 #' \item \strong{mode}: Create a reducer that will compute the mode of the
-#' inputs.  For small numbers of inputs (up to maxRaw) the mode will be
-#' computed directly; for larger numbers of inputs the mode will be derived
+#' inputs.  For a small number of inputs (up to maxRaw) the mode will be
+#' computed directly; for a larger number of inputs the mode will be derived
 #' from a histogram.
 #' \item \strong{product}: Returns a Reducer that computes the product of
-#' its inputs.
-#' \item \strong{sampleStdDev}: Returns a Reducer that computes the sample
-#' standard deviation of its inputs.
-#' \item \strong{sampleVariance}: Returns a Reducer that computes the sample
-#' variance of its inputs.
+#' the inputs.
+#' \item \strong{sampleStdDev}: Returns a Reducer that computes the
+#' standard deviation of the inputs.
+#' \item \strong{sampleVariance}: Returns a Reducer that computes the
+#' variance of the inputs.
 #' \item \strong{stdDev}: Returns a Reducer that computes the standard
-#' deviation of its inputs.
+#' deviation of the inputs.
 #' \item \strong{sum}: Returns a Reducer that computes the (weighted) sum
-#' of its inputs.
+#' of the inputs.
 #' \item \strong{variance}: Returns a Reducer that computes the variance
-#' of its inputs.
+#' of the inputs.
 #' }
 #' @examples
 #' library(rgee)
 #' library(sf)
 #'
 #' # authenticate and initialize Earth Engine
-#' ee_reattach() # reattach ee as a reserve word
+#' ee_reattach() # reattach ee as a reserved word
 #' ee_Initialize()
 #'
 #' # get monthly precipitation from terraclimate
