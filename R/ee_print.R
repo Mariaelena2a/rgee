@@ -2,20 +2,20 @@
 #'
 #' @param eeobject Earth Engine Object. Available for: Geometry, Feature,
 #' FeatureCollection, Image or ImageCollection.
-#' @param clean Logical; Whether is TRUE cache will cleaned, see Description.
+#' @param clean Logical; If is TRUE the cache will be cleaned, see Description.
 #' @param max_display Set the max number of properties to display.
-#' @details For avoiding computing time extremely large and "EEException"
-#' related with memory consuming (
-#' \href{https://developers.google.com/earth-engine/ic_info}{See this
+#' @details To deal with large computational demands and the task of "EEException"
+#' related to the memory consuming (
+#' \href{https://developers.google.com/earth-engine/ic_info}{See the
 #' Earth Engine Guide}) just the first element of: ee$Image, ee$ImageCollection,
 #' ee$Feature and ee$FeatureCollection will be used to generated Earth Engine
-#' object properties. By default ee_print create a list with all the print
-#' parameters. It is due to avoid repeated queries to the Earth Engine Server.
+#' object properties. By default ee_print displays the full list of print
+#' parameters. Repeated queries to the Earth Engine Server must be avoided.
 #' @importFrom sf st_crs
 #' @examples
 #' library(rgee)
 #'
-#' ee_reattach() # reattach ee as a reserve word
+#' ee_reattach() # reattach ee as a reserved word
 #' ee_Initialize()
 #'
 #' eeobject <- ee$ImageCollection("LANDSAT/LC08/C01/T1_TOA")$
